@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroJurno Farm - Sistem Usaha Bersama Ayam Petelur</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .bg-banner-gradient {
+            background: linear-gradient(135deg, #b91c1c 0%, #dc2626 50%, #991b1b 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-slate-50 min-h-screen flex flex-col">
+
+    <!-- Header & Top Branding Banner Sesuai Referensi Gambar Spanduk -->
+    <header class="bg-banner-gradient text-white shadow-2xl relative overflow-hidden border-b-4 border-amber-400">
+        <!-- Sunburst Accent Effect -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-200 via-transparent to-transparent"></div>
+
+        <!-- Banner Top Strip info -->
+        <div class="bg-red-950/60 px-4 py-1.5 text-xs text-amber-200 flex flex-wrap justify-between items-center border-b border-red-700/50">
+            <div class="flex items-center space-x-4 max-w-7xl mx-auto w-full justify-between">
+                <span class="font-medium flex items-center gap-1.5 text-[11px] sm:text-xs">
+                    <i class="fa-solid fa-location-dot text-amber-400"></i> Jln. Rumasa Kampung Baru Citayam RT 05 RW 05 No. 121 Desa Citayam, Kec. Tajurhalang, Kab. Bogor
+                </span>
+                <span class="hidden md:flex items-center gap-1.5 font-bold text-amber-300">
+                    <i class="fa-brands fa-whatsapp text-emerald-400"></i> +62 812-1939-8882
+                </span>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4 relative z-10">
+            
+            <!-- Logo AgroJurno Farm Lengkap Sesuai Banner -->
+            <div class="flex items-center space-x-4">
+                <!-- SVG Emblem AgroJurno Logo Presisi Gambar Referensi -->
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full p-1 border-2 border-amber-400 shadow-xl flex-shrink-0 flex items-center justify-center">
+                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                        <!-- Background Circle Hijau Tua -->
+                        <circle cx="100" cy="100" r="96" fill="#064e3b" stroke="#f59e0b" stroke-width="4"/>
+                        <circle cx="100" cy="100" r="88" fill="#ffffff"/>
+                        <circle cx="100" cy="92" r="70" fill="#047857"/>
+
+                        <!-- Sun Rays Background -->
+                        <g stroke="#fef08a" stroke-width="3" opacity="0.6">
+                            <line x1="100" y1="90" x2="100" y2="28" />
+                            <line x1="100" y1="90" x2="45" y2="40" />
+                            <line x1="100" y1="90" x2="155" y2="40" />
+                            <line x1="100" y1="90" x2="25" y2="70" />
+                            <line x1="100" y1="90" x2="175" y2="70" />
+                        </g>
+
+                        <!-- Sun Disk -->
+                        <circle cx="100" cy="65" r="22" fill="#f59e0b"/>
+
+                        <!-- House/Farm Silhouette -->
+                        <rect x="35" y="65" width="22" height="16" fill="#b91c1c"/>
+                        <polygon points="32,65 46,52 60,65" fill="#7f1d1d"/>
+
+                        <!-- Chicken Body -->
+                        <path d="M 85,85 Q 70,60 92,48 Q 110,48 122,65 Q 135,80 120,95 Q 100,105 85,85 Z" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+                        <path d="M 98,48 Q 105,38 112,48 Z" fill="#dc2626"/> <!-- Comb -->
+                        <path d="M 85,58 Q 78,60 83,64 Z" fill="#f59e0b"/> <!-- Beak -->
+                        <path d="M 88,64 Q 85,72 90,70 Z" fill="#dc2626"/> <!-- Wattle -->
+
+                        <!-- Golden Eggs -->
+                        <ellipse cx="100" cy="94" rx="14" ry="18" fill="#fbbf24" stroke="#b45309" stroke-width="2"/>
+                        <ellipse cx="80" cy="98" rx="10" ry="13" fill="#f59e0b" stroke="#b45309" stroke-width="1.5" transform="rotate(-15 80 98)"/>
+                        <ellipse cx="120" cy="98" rx="10" ry="13" fill="#f59e0b" stroke="#b45309" stroke-width="1.5" transform="rotate(15 120 98)"/>
+
+                        <!-- Open Book (Buku Usaha) -->
+                        <path d="M 30,122 Q 100,102 170,122 L 170,140 Q 100,122 30,140 Z" fill="#fef3c7" stroke="#047857" stroke-width="2.5"/>
+                        <line x1="100" y1="110" x2="100" y2="132" stroke="#047857" stroke-width="2"/>
+
+                        <!-- Green Ribbon Outer -->
+                        <path d="M 15,135 L 40,125 L 160,125 L 185,135 L 170,172 L 30,172 Z" fill="#064e3b" stroke="#f59e0b" stroke-width="2"/>
+
+                        <!-- Gold Ribbon Banner Inner -->
+                        <path d="M 22,130 Q 100,118 178,130 L 172,156 Q 100,144 28,156 Z" fill="#fef08a" stroke="#d97706" stroke-width="1.5"/>
+                        <text x="100" y="148" text-anchor="middle" font-size="14" font-weight="900" fill="#064e3b" font-family="'Plus Jakarta Sans', sans-serif">USAHA BERSAMA</text>
+                        <text x="100" y="167" text-anchor="middle" font-size="9" font-weight="bold" fill="#ffffff" font-family="sans-serif">PETERNAKAN AYAM PETELUR</text>
+                    </svg>
+                </div>
+
+                <div>
+                    <h1 class="font-extrabold text-2xl sm:text-3xl leading-none tracking-tight text-white drop-shadow">AgroJurno Farm</h1>
+                    <p class="text-xs sm:text-sm text-amber-300 font-semibold mt-1 flex items-center gap-1.5">
+                        <span class="bg-emerald-700 text-white text-[10px] px-2 py-0.5 rounded-md font-bold uppercase">Usaha Bersama</span>
+                        Kelompok Peternakan Ayam Petelur (10 Anggota)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Header Middle Quote / Tagline & Kementan Logo -->
+            <div class="hidden lg:flex items-center space-x-6 border-l border-red-600/60 pl-6">
+                <!-- Slogan Spanduk Referensi -->
+                <div class="max-w-xs text-xs italic text-red-100 leading-tight">
+                    <span class="text-amber-300 font-bold not-italic">“</span> Bersama Memperkuat ketahanan pangan nasional & mendukung penyediaan gizi melalui pengembangan <span class="text-amber-300 font-bold not-italic">Ayam Petelur Rakyat ”</span>
+                </div>
+
+                <!-- Kementan Logo Badge -->
+                <div class="bg-amber-400 text-red-950 p-2 rounded-xl flex items-center space-x-2 shadow-md">
+                    <!-- Kementan Symbol SVG -->
+                    <div class="w-9 h-9 bg-yellow-400 rounded-full border border-red-800 flex items-center justify-center p-1">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <polygon points="50,5 95,30 95,70 50,95 5,70 5,30" fill="#facc15" stroke="#15803d" stroke-width="4"/>
+                            <circle cx="50" cy="50" r="30" fill="#ffffff" stroke="#16a34a" stroke-width="3"/>
+                            <path d="M 50,25 C 40,40 30,50 50,75 C 70,50 60,40 50,25 Z" fill="#16a34a"/>
+                            <path d="M 35,45 Q 50,35 65,45" fill="none" stroke="#ca8a04" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="text-[10px] font-extrabold uppercase leading-tight tracking-tighter">
+                        Kementerian Pertanian<br/><span class="text-emerald-900 font-black">Republik Indonesia</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Switcher Controls -->
+            <div class="flex items-center space-x-3 text-xs">
+                <!-- User Selector -->
+                <div class="flex items-center bg-red-950/80 px-3 py-2 rounded-xl border border-amber-400/50 shadow-inner">
+                    <i class="fa-solid fa-user-shield text-amber-400 mr-2 text-sm"></i>
+                    <span class="text-red-200 hidden sm:inline mr-1.5 font-medium">Akses:</span>
+                    <select id="select-active-user" onchange="changeActiveUser(this.value)" class="bg-transparent text-white font-bold outline-none cursor-pointer">
+                        <option value="Admin Utama (Ketua)" class="bg-slate-900 text-white">Admin Utama (Ketua) [Akses Penuh]</option>
+                        <option value="Sekretaris Kelompok" class="bg-slate-900 text-white">Sekretaris Kelompok [Akses Penuh]</option>
+                        <option value="Bendahara Kelompok" class="bg-slate-900 text-white">Bendahara Kelompok</option>
+                        <option value="Seksi Operasional" class="bg-slate-900 text-white">Seksi Operasional</option>
+                    </select>
+                </div>
+
+                <button onclick="toggleModal('modal-info')" class="bg-amber-400 hover:bg-amber-300 text-red-950 font-extrabold px-3.5 py-2 rounded-xl transition shadow-md flex items-center gap-1.5">
+                    <i class="fa-solid fa-calculator"></i> Skema
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- App Container -->
+    <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row gap-6">
+
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-white rounded-2xl shadow-sm border border-slate-200/80 p-4 h-fit flex-shrink-0">
+            <nav class="space-y-1">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition bg-red-50 text-red-700 font-bold border-l-4 border-red-600">
+                    <i class="fa-solid fa-chart-line w-5 text-red-600"></i>
+                    <span>Dashboard Utama</span>
+                </button>
+
+                <button onclick="switchTab('pivot-harian')" id="nav-pivot-harian" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                    <i class="fa-solid fa-table-cells w-5 text-slate-400"></i>
+                    <span>Pivot Produksi & Jual</span>
+                </button>
+
+                <button onclick="switchTab('anggota')" id="nav-anggota" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                    <i class="fa-solid fa-user-group w-5 text-slate-400"></i>
+                    <span>Data Anggota (10)</span>
+                </button>
+
+                <button onclick="switchTab('populasi')" id="nav-populasi" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                    <i class="fa-solid fa-feather w-5 text-slate-400"></i>
+                    <span>Kesehatan & Ayam</span>
+                </button>
+
+                <button onclick="switchTab('produksi')" id="nav-produksi" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                    <i class="fa-solid fa-basket-shopping w-5 text-slate-400"></i>
+                    <span>Input Produksi & Jual</span>
+                </button>
+
+                <button onclick="switchTab('keuangan')" id="nav-keuangan" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                    <i class="fa-solid fa-wallet w-5 text-slate-400"></i>
+                    <span>Kas Masuk & Keluar</span>
+                </button>
+
+                <button onclick="switchTab('deviden')" id="nav-deviden" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                    <i class="fa-solid fa-coins w-5 text-slate-400"></i>
+                    <span>Bagi Hasil Deviden</span>
+                </button>
+
+                <button onclick="switchTab('audit')" id="nav-audit" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+                    <i class="fa-solid fa-clock-rotate-left w-5 text-slate-400"></i>
+                    <span>Audit Log Sistem</span>
+                </button>
+            </nav>
+
+            <div class="mt-6 pt-4 border-t border-slate-100">
+                <div class="bg-red-50/70 p-3 rounded-xl border border-red-100 text-xs text-red-950">
+                    <div class="font-bold mb-1 flex items-center gap-1.5 text-red-900">
+                        <i class="fa-solid fa-shield-halved text-red-600"></i> Sistem Transparan
+                    </div>
+                    <p class="text-[11px] text-slate-600">Sistem pencatatan peternakan ayam petelur terintegrasi 10 anggota sesuai asas keterbukaan.</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 space-y-6">
+
+            <!-- 1. DASHBOARD VIEW -->
+            <section id="view-dashboard" class="space-y-6">
+                <!-- Banner Quick Features Badges -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="bg-white p-3 rounded-xl border-l-4 border-red-600 shadow-sm flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs text-slate-800">Usaha Bersama</h4>
+                            <p class="text-[11px] text-slate-500">10 Anggota Terdaftar</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border-l-4 border-amber-500 shadow-sm flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-drumstick-bite"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs text-slate-800">Ayam Sehat</h4>
+                            <p class="text-[11px] text-slate-500">Produksi Optimal</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border-l-4 border-emerald-600 shadow-sm flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-egg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs text-slate-800">Telur Berkualitas</h4>
+                            <p class="text-[11px] text-slate-500">Gizi Terjaga</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Metric Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Total Ayam Produksi -->
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Ayam Sehat / Aktif</p>
+                            <h3 class="text-2xl font-bold text-slate-800 mt-1" id="dash-ayam-sehat">0 Ekor</h3>
+                            <p class="text-xs text-slate-500 mt-1">Total awal: <span id="dash-ayam-total">0</span> Ekor</p>
+                        </div>
+                        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-drumstick-bite"></i>
+                        </div>
+                    </div>
+
+                    <!-- Production Telur Baik -->
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Telur Baik</p>
+                            <h3 class="text-2xl font-bold text-slate-800 mt-1" id="dash-telur-baik">0 Butir</h3>
+                            <p class="text-xs text-amber-600 font-medium mt-1"><span id="dash-telur-rusak">0</span> Retak/Pecah</p>
+                        </div>
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-egg"></i>
+                        </div>
+                    </div>
+
+                    <!-- Total Penjualan Omset -->
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Omset Penjualan</p>
+                            <h3 class="text-2xl font-bold text-red-600 mt-1" id="dash-pendapatan">Rp 0</h3>
+                            <p class="text-xs text-slate-500 mt-1">Telur Utama + Afkir/Rusak</p>
+                        </div>
+                        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                        </div>
+                    </div>
+
+                    <!-- Total Kas Bersih -->
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Kas Kelompok (Inc 7%)</p>
+                            <h3 class="text-2xl font-bold text-amber-600 mt-1" id="dash-kas-total">Rp 0</h3>
+                            <p class="text-xs text-slate-500 mt-1">Total Modal: <span id="dash-total-modal">Rp 0</span></p>
+                        </div>
+                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-vault"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-chart-pie text-amber-500"></i> Proporsi Kualitas Hasil Telur
+                            </h3>
+                        </div>
+                        <div class="relative h-64 flex justify-center items-center">
+                            <canvas id="chartTelur"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-chart-pie text-red-500"></i> Status Kesehatan Populasi Ayam
+                            </h3>
+                        </div>
+                        <div class="relative h-64 flex justify-center items-center">
+                            <canvas id="chartAyam"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Quick Summary -->
+                <div class="bg-gradient-to-br from-red-950 via-slate-900 to-red-900 text-white p-6 rounded-2xl shadow-md border border-red-800/50">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div>
+                            <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                                <i class="fa-solid fa-coins"></i> Formulasi Pembagian Hasil AgroJurno Farm
+                            </h3>
+                            <p class="text-xs text-slate-300">Skema Otomatis Berdasarkan Akumulasi Penjualan Telur</p>
+                        </div>
+                        <button onclick="switchTab('deviden')" class="bg-amber-400 hover:bg-amber-300 text-red-950 px-4 py-2 rounded-xl text-xs font-extrabold transition">
+                            Lihat Rincian Per Anggota <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-slate-800/80 border border-slate-700/70 p-4 rounded-xl">
+                            <span class="text-xs text-amber-300 font-semibold uppercase">Kas Kelompok (7%)</span>
+                            <div class="text-xl font-bold mt-1" id="summary-kas-7">Rp 0</div>
+                            <p class="text-[11px] text-slate-400 mt-1">Dipotong dari total omset harian</p>
+                        </div>
+                        <div class="bg-slate-800/80 border border-slate-700/70 p-4 rounded-xl">
+                            <span class="text-xs text-emerald-300 font-semibold uppercase">Deviden Modal (63% x 70%)</span>
+                            <div class="text-xl font-bold mt-1" id="summary-deviden-63">Rp 0</div>
+                            <p class="text-[11px] text-slate-400 mt-1">Hak bersih 10 anggota secara proporsional</p>
+                        </div>
+                        <div class="bg-slate-800/80 border border-slate-700/70 p-4 rounded-xl">
+                            <span class="text-xs text-blue-300 font-semibold uppercase">Dana Retensi Usaha (30%)</span>
+                            <div class="text-xl font-bold mt-1" id="summary-retensi-30">Rp 0</div>
+                            <p class="text-[11px] text-slate-400 mt-1">Disisihkan untuk modal kerja peternakan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. PIVOT TABEL PRODUKSI & PENJUALAN HARIAN -->
+            <section id="view-pivot-harian" class="space-y-6 hidden">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-table-cells text-emerald-600"></i> Pivot Tabel Rekapitulasi Harian
+                            </h2>
+                            <p class="text-xs text-slate-500">Rincian perolehan jumlah telur dan omset penjualan telur setiap harinya.</p>
+                        </div>
+                        <div class="text-xs font-medium bg-emerald-50 text-emerald-800 px-3 py-2 rounded-xl border border-emerald-200">
+                            Total Catatan Harian: <b id="pivot-total-hari">0</b> Hari
+                        </div>
+                    </div>
+
+                    <!-- Pivot Table Content -->
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-sm text-left text-slate-600">
+                            <thead class="text-xs text-slate-700 uppercase bg-emerald-100/70 rounded-lg">
+                                <tr>
+                                    <th class="px-4 py-3 rounded-l-lg">Tanggal</th>
+                                    <th class="px-3 py-3 text-center bg-emerald-200/50">Telur Baik</th>
+                                    <th class="px-3 py-3 text-center">Retak</th>
+                                    <th class="px-3 py-3 text-center">Pecah</th>
+                                    <th class="px-3 py-3 text-center font-bold text-slate-800">Total Butir</th>
+                                    <th class="px-4 py-3 text-right">Penjualan Telur Utama</th>
+                                    <th class="px-4 py-3 text-right">Penjualan Rusak/Afkir</th>
+                                    <th class="px-4 py-3 text-right rounded-r-lg font-bold text-emerald-800">Total Omset Harian</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-pivot-body" class="divide-y divide-slate-100">
+                                <!-- Dynamic Data Pivot -->
+                            </tbody>
+                            <tfoot id="table-pivot-foot" class="bg-slate-100 font-bold text-slate-800 text-xs">
+                                <!-- Dynamic Totals -->
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. DATA ANGGOTA VIEW (MAX 10) -->
+            <section id="view-anggota" class="space-y-6 hidden">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">Daftar Anggota Kelompok Usaha (Maksimal 10 Orang)</h2>
+                            <p class="text-xs text-slate-500">Kelola identitas, nomor WhatsApp, jabatan, status keanggotaan, dan setoran modal.</p>
+                        </div>
+                        <button onclick="openModalTambahAnggota()" id="btn-tambah-anggota" class="bg-red-700 hover:bg-red-800 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-user-plus"></i> Tambah Anggota
+                        </button>
+                    </div>
+
+                    <!-- Table Anggota -->
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-sm text-left text-slate-600">
+                            <thead class="text-xs text-slate-700 uppercase bg-slate-100 rounded-lg">
+                                <tr>
+                                    <th class="px-4 py-3 rounded-l-lg">No</th>
+                                    <th class="px-4 py-3">No. Anggota</th>
+                                    <th class="px-4 py-3">Nama Anggota</th>
+                                    <th class="px-4 py-3">No. WA</th>
+                                    <th class="px-4 py-3">Jabatan</th>
+                                    <th class="px-4 py-3">Status</th>
+                                    <th class="px-4 py-3">Modal Disetor</th>
+                                    <th class="px-4 py-3 text-center rounded-r-lg">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-anggota-body" class="divide-y divide-slate-100">
+                                <!-- Dynamic Content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. DATA AYAM & KESEHATAN -->
+            <section id="view-populasi" class="space-y-6 hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Form Input Catatan Kesehatan -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                        <h3 class="text-md font-bold text-slate-800 mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-notes-medical text-emerald-600"></i> Catat Kondisi Kesehatan Ayam
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-4">Perbarui status ayam (Sakit, Mati, Afkir).</p>
+
+                        <form id="form-kesehatan" onsubmit="handleKesehatanSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Tanggal Catatan</label>
+                                <input type="date" id="kes-tgl" required class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Kondisi / Status</label>
+                                <select id="kes-status" required class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                                    <option value="Sakit">Sakit</option>
+                                    <option value="Mati">Mati</option>
+                                    <option value="Afkir">Afkir (Tidak Produktif)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Jumlah (Ekor)</label>
+                                <input type="number" id="kes-jumlah" min="1" required placeholder="Contoh: 2" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Keterangan / Gejala</label>
+                                <textarea id="kes-ket" rows="3" placeholder="Penjelasan atau tindakan karantina..." class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs py-2.5 rounded-xl transition shadow-sm">
+                                <i class="fa-solid fa-plus-circle mr-1"></i> Simpan Catatan Kesehatan
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Tabel Riwayat Kesehatan & Status Populasi -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">Populasi Awal Ayam Petelur</h4>
+                                <p class="text-xs text-slate-500">Jumlah total indukan sebelum berkurang karena sakit/mati/afkir.</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="number" id="input-populasi-awal" min="0" class="w-28 px-3 py-1.5 text-sm border border-slate-300 rounded-xl text-right font-bold text-slate-800">
+                                <button onclick="updatePopulasiAwal()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs px-3 py-2 rounded-xl font-medium transition">
+                                    Simpan
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Table Riwayat Kesehatan -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                            <h3 class="text-md font-bold text-slate-800 mb-4">Riwayat Catatan Kesehatan</h3>
+                            <div class="overflow-x-auto custom-scrollbar max-h-80">
+                                <table class="w-full text-sm text-left text-slate-600">
+                                    <thead class="text-xs text-slate-700 uppercase bg-slate-100 rounded-lg sticky top-0">
+                                        <tr>
+                                            <th class="px-4 py-3">Tanggal</th>
+                                            <th class="px-4 py-3">Kondisi</th>
+                                            <th class="px-4 py-3">Jumlah</th>
+                                            <th class="px-4 py-3">Keterangan</th>
+                                            <th class="px-4 py-3 text-center">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-kesehatan-body" class="divide-y divide-slate-100">
+                                        <!-- Dynamic Data -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. PRODUKSI & PENJUALAN TELUR -->
+            <section id="view-produksi" class="space-y-6 hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Form Input Produksi & Penjualan -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                        <h3 class="text-md font-bold text-slate-800 mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-egg text-amber-600"></i> Form Input Panen & Jual
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-4">Pencatatan perolehan dan pendapatan harian.</p>
+
+                        <form id="form-produksi" onsubmit="handleProduksiSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Tanggal Panen</label>
+                                <input type="date" id="prod-tgl" required class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                    <label class="block text-[11px] font-medium text-slate-700 mb-1">Baik (Btr)</label>
+                                    <input type="number" id="prod-baik" min="0" value="0" required class="w-full px-2.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-medium text-slate-700 mb-1">Retak (Btr)</label>
+                                    <input type="number" id="prod-retak" min="0" value="0" required class="w-full px-2.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-medium text-slate-700 mb-1">Pecah (Btr)</label>
+                                    <input type="number" id="prod-pecah" min="0" value="0" required class="w-full px-2.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Harga Jual Per Butir Baik (Rp)</label>
+                                <input type="number" id="prod-harga" min="0" required placeholder="Contoh: 1800" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Penjualan Telur Rusak/Afkir (Rp)</label>
+                                <input type="number" id="prod-penjualan-rusak" min="0" value="0" placeholder="0" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+
+                            <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs py-2.5 rounded-xl transition shadow-sm">
+                                <i class="fa-solid fa-save mr-1"></i> Simpan Data Produksi
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Data Tabel Panen -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                        <h3 class="text-md font-bold text-slate-800 mb-4">Riwayat Input Panen Harian</h3>
+                        <div class="overflow-x-auto custom-scrollbar">
+                            <table class="w-full text-sm text-left text-slate-600">
+                                <thead class="text-xs text-slate-700 uppercase bg-slate-100 rounded-lg">
+                                    <tr>
+                                        <th class="px-4 py-3">Tanggal</th>
+                                        <th class="px-3 py-3">Baik</th>
+                                        <th class="px-3 py-3">Retak</th>
+                                        <th class="px-3 py-3">Pecah</th>
+                                        <th class="px-4 py-3">Total Omset</th>
+                                        <th class="px-4 py-3 text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-produksi-body" class="divide-y divide-slate-100">
+                                    <!-- Dynamic Data -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. KAS MASUK & KAS KELUAR -->
+            <section id="view-keuangan" class="space-y-6 hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Form Mutasi Kas -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                        <h3 class="text-md font-bold text-slate-800 mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-money-bill-transfer text-emerald-600"></i> Catat Kas Masuk & Kas Keluar
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-4">Pencatatan mutasi kas dan pengeluaran operasional.</p>
+
+                        <form id="form-kas" onsubmit="handleKasSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Tanggal</label>
+                                <input type="date" id="kas-tgl" required class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Jenis Transaksi</label>
+                                <select id="kas-jenis" required class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                                    <option value="Masuk">Kas Masuk (Iuran/Modal Tambahan)</option>
+                                    <option value="Keluar">Kas Keluar (Biaya Pakan / Operasional)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Kategori Pengeluaran / Pemasukan</label>
+                                <select id="kas-kategori" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                                    <option value="Pakan Ayam">Pakan Ayam</option>
+                                    <option value="Obat & Vaksin">Obat & Vaksin</option>
+                                    <option value="Operasional Kandang">Operasional Kandang</option>
+                                    <option value="Pemeliharaan & Listrik">Pemeliharaan & Listrik</option>
+                                    <option value="Iuran Anggota">Iuran Anggota</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Nominal (Rp)</label>
+                                <input type="number" id="kas-jumlah" min="1" required placeholder="Contoh: 150000" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-700 mb-1">Keterangan Detail</label>
+                                <input type="text" id="kas-ket" required placeholder="Detail pengeluaran atau bukti..." class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+
+                            <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs py-2.5 rounded-xl transition shadow-sm">
+                                <i class="fa-solid fa-plus-circle mr-1"></i> Simpan Transaksi Kas
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Riwayat Transaksi Kas Kelompok -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                            <h3 class="text-md font-bold text-slate-800">Buku Mutasi Kas & Pengeluaran</h3>
+                            <span class="text-xs font-semibold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-full" id="badge-saldo-kas">Saldo: Rp 0</span>
+                        </div>
+                        <div class="overflow-x-auto custom-scrollbar">
+                            <table class="w-full text-sm text-left text-slate-600">
+                                <thead class="text-xs text-slate-700 uppercase bg-slate-100 rounded-lg">
+                                    <tr>
+                                        <th class="px-4 py-3">Tanggal</th>
+                                        <th class="px-4 py-3">Jenis</th>
+                                        <th class="px-4 py-3">Kategori</th>
+                                        <th class="px-4 py-3">Keterangan</th>
+                                        <th class="px-4 py-3 text-right">Nominal</th>
+                                        <th class="px-4 py-3 text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-kas-body" class="divide-y divide-slate-100">
+                                    <!-- Dynamic Data -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. BAGI HASIL DEVIDEN -->
+            <section id="view-deviden" class="space-y-6 hidden">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 space-y-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-4">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">Pembagian Deviden Modal AgroJurno Farm</h2>
+                            <p class="text-xs text-slate-500">Kalkulasi transparan berdasarkan persentase kepemilikan modal 10 anggota.</p>
+                        </div>
+                        <div class="bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-xl text-xs font-semibold text-emerald-900">
+                            Total Deviden Bersih Diterima (70%): <span id="deviden-total-dibagi" class="text-emerald-700 font-bold">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <!-- Formula Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-emerald-50/60 p-4 rounded-xl border border-emerald-200/60 text-xs">
+                        <div>
+                            <span class="font-bold text-emerald-950 block mb-1">1. Alokasi Kas (7%)</span>
+                            <p class="text-slate-600">7% dari omset penjualan telur masuk kas operasional kelompok.</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-emerald-950 block mb-1">2. Alokasi Deviden (63%)</span>
+                            <p class="text-slate-600">63% omset dialokasikan untuk hak modal anggota (70% dibagikan, 30% ditahan/retensi).</p>
+                        </div>
+                        <div>
+                            <span class="font-bold text-emerald-950 block mb-1">3. Retensi Usaha (30%)</span>
+                            <p class="text-slate-600">30% dari dana porsi deviden disimpan untuk cadangan pengembangan usaha.</p>
+                        </div>
+                    </div>
+
+                    <!-- Rincian Pembagian Deviden Per Anggota Table -->
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-sm text-left text-slate-600">
+                            <thead class="text-xs text-slate-700 uppercase bg-slate-100 rounded-lg">
+                                <tr>
+                                    <th class="px-4 py-3">No</th>
+                                    <th class="px-4 py-3">Nama Anggota</th>
+                                    <th class="px-4 py-3">Modal Disetor</th>
+                                    <th class="px-4 py-3">% Proporsi</th>
+                                    <th class="px-4 py-3 font-semibold text-emerald-700">Deviden Diterima (70%)</th>
+                                    <th class="px-4 py-3 text-slate-500">Dana Retensi (30%)</th>
+                                    <th class="px-4 py-3 text-center">Slip WA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-deviden-body" class="divide-y divide-slate-100">
+                                <!-- Dynamic Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. AUDIT LOG SISTEM -->
+            <section id="view-audit" class="space-y-6 hidden">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-clock-rotate-left text-emerald-600"></i> Audit Log Perubahan Sistem
+                            </h2>
+                            <p class="text-xs text-slate-500">Rekap riwayat aktivitas perubah data (siapa, kapan, dan aktivitas apa yang dilakukan).</p>
+                        </div>
+                        <button onclick="clearAuditLog()" class="text-xs text-rose-600 hover:text-rose-800 font-semibold border border-rose-200 px-3 py-1.5 rounded-xl hover:bg-rose-50 transition">
+                            <i class="fa-solid fa-trash-can mr-1"></i> Bersihkan Log Audit
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto custom-scrollbar max-h-96">
+                        <table class="w-full text-sm text-left text-slate-600">
+                            <thead class="text-xs text-slate-700 uppercase bg-slate-100 rounded-lg sticky top-0">
+                                <tr>
+                                    <th class="px-4 py-3">Waktu Stempel</th>
+                                    <th class="px-4 py-3">Pelaku Perubahan (User)</th>
+                                    <th class="px-4 py-3">Tipe Aksi</th>
+                                    <th class="px-4 py-3">Rincian Perubahan / Aktivitas</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-audit-body" class="divide-y divide-slate-100">
+                                <!-- Dynamic Audit Logs -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL TAMBAH / EDIT ANGGOTA -->
+    <div id="modal-anggota" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl relative">
+            <button onclick="toggleModal('modal-anggota')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-lg font-bold text-slate-800 mb-1" id="modal-anggota-title">Form Data Anggota</h3>
+            <p class="text-xs text-slate-500 mb-4">Lengkapi data keanggotaan kelompok usaha (Maksimal 10 orang).</p>
+
+            <form id="form-anggota" onsubmit="handleAnggotaSubmit(event)" class="space-y-4">
+                <input type="hidden" id="anggota-index" value="-1">
+                
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Nomor Anggota</label>
+                    <input type="text" id="anggota-no" required placeholder="Contoh: AGT-001" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Nama Lengkap</label>
+                    <input type="text" id="anggota-nama" required placeholder="Nama Anggota" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">No. WhatsApp</label>
+                    <input type="text" id="anggota-wa" required placeholder="08123456789" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Jabatan</label>
+                        <select id="anggota-jabatan" required class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            <option value="Ketua">Ketua</option>
+                            <option value="Sekretaris">Sekretaris</option>
+                            <option value="Bendahara">Bendahara</option>
+                            <option value="Seksi Operasional">Seksi Operasional</option>
+                            <option value="Anggota">Anggota</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">Keanggotaan</label>
+                        <select id="anggota-status" required class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Pasif">Pasif</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-700 mb-1">Setoran Modal (Rp)</label>
+                    <input type="number" id="anggota-modal" min="0" required placeholder="Contoh: 5000000" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+
+                <div class="pt-2 flex justify-end space-x-2">
+                    <button type="button" onclick="toggleModal('modal-anggota')" class="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-xl transition">Batal</button>
+                    <button type="submit" class="px-4 py-2 text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl transition shadow-sm">Simpan Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL INFO RUMUS & BANTUAN -->
+    <div id="modal-info" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="toggleModal('modal-info')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-calculator text-emerald-600"></i> Ketentuan & Rumus Pembagian AgroJurno
+            </h3>
+            
+            <div class="space-y-4 text-xs text-slate-600">
+                <div class="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200">
+                    <h4 class="font-bold text-emerald-950 mb-1">1. Pembagian Omset Telur</h4>
+                    <ul class="list-disc list-inside mt-1 space-y-1">
+                        <li><b>7%</b> dialokasikan ke <b>Kas Kelompok</b>.</li>
+                        <li><b>63%</b> dialokasikan untuk porsi <b>Bagi Hasil Modal Anggota</b>.</li>
+                        <li><b>30%</b> dialokasikan untuk cadangan operasional/retensi.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200">
+                    <h4 class="font-bold text-amber-950 mb-1">2. Rumus Pembagian Deviden Anggota (Porsi 63%)</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><b>Deviden Anggota (70%)</b> = (Modal Anggota / Total Modal Kelompok) × (63% Omset × 70%)</li>
+                        <li><b>Dana Retensi (30%)</b> = (Modal Anggota / Total Modal Kelompok) × (63% Omset × 30%)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 text-right">
+                <button onclick="toggleModal('modal-info')" class="px-4 py-2 bg-slate-800 text-white rounded-xl text-xs font-semibold hover:bg-slate-700 transition">Tutup Bantuan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 text-xs z-50 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toast-message">Pesan notifikasi...</span>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        // Initial 10 Members Pre-populated
+        const DEFAULT_ANGGOTA = [
+            { no: "AGT-001", nama: "Budi Santoso", wa: "081234567801", jabatan: "Ketua", status: "Aktif", modal: 10000000 },
+            { no: "AGT-002", nama: "Siti Aminah", wa: "081234567802", jabatan: "Sekretaris", status: "Aktif", modal: 8000000 },
+            { no: "AGT-003", nama: "Ahmad Dahlan", wa: "081234567803", jabatan: "Bendahara", status: "Aktif", modal: 8000000 },
+            { no: "AGT-004", nama: "Eko Prasetyo", wa: "081234567804", jabatan: "Seksi Operasional", status: "Aktif", modal: 5000000 },
+            { no: "AGT-005", nama: "Dewi Lestari", wa: "081234567805", jabatan: "Anggota", status: "Aktif", modal: 5000000 },
+            { no: "AGT-006", nama: "Hendra Wijaya", wa: "081234567806", jabatan: "Anggota", status: "Aktif", modal: 5000000 },
+            { no: "AGT-007", nama: "Rina Rose", wa: "081234567807", jabatan: "Anggota", status: "Pasif", modal: 4000000 },
+            { no: "AGT-008", nama: "Ginanjar", wa: "081234567808", jabatan: "Anggota", status: "Aktif", modal: 5000000 },
+            { no: "AGT-009", nama: "Sri Wahyuni", wa: "081234567809", jabatan: "Anggota", status: "Aktif", modal: 5000000 },
+            { no: "AGT-010", nama: "Fajar Nugraha", wa: "081234567810", jabatan: "Anggota", status: "Aktif", modal: 5000000 }
+        ];
+
+        // System Global State
+        let activeUser = "Admin Utama (Ketua)";
+        let appState = {
+            populasiAwal: 500,
+            anggota: [],
+            kesehatan: [
+                { id: 1, tgl: '2026-11-01', status: 'Sakit', jumlah: 3, ket: 'Flu burung ringan, karantina' },
+                { id: 2, tgl: '2026-11-03', status: 'Mati', jumlah: 1, ket: 'Kondisi fisik lemah' }
+            ],
+            produksi: [
+                { id: 1, tgl: '2026-11-08', baik: 420, retak: 12, pecah: 5, harga: 1800, penjualanRusak: 10000 },
+                { id: 2, tgl: '2026-11-09', baik: 435, retak: 8, pecah: 3, harga: 1850, penjualanRusak: 5000 }
+            ],
+            kas: [
+                { id: 1, tgl: '2026-11-01', jenis: 'Masuk', kategori: 'Iuran Anggota', jumlah: 1000000, ket: 'Kas awal kelompok bulan November' },
+                { id: 2, tgl: '2026-11-05', jenis: 'Keluar', kategori: 'Obat & Vaksin', jumlah: 250000, ket: 'Pembelian vitamin dan disinfektan kandang' },
+                { id: 3, tgl: '2026-11-07', jenis: 'Keluar', kategori: 'Pakan Ayam', jumlah: 600000, ket: 'Beli Pakan Konsentrat 1 Karung' }
+            ],
+            auditLogs: [
+                { timestamp: '2026-11-01 08:00', user: 'Admin Utama (Ketua)', action: 'INIT', detail: 'Sistem AgroJurno Farm diinisialisasi.' }
+            ]
+        };
+
+        // Helper untuk mengecek apakah user saat ini memiliki Akses Admin Penuh
+        function hasFullAdminAccess() {
+            return activeUser === 'Admin Utama (Ketua)' || activeUser === 'Sekretaris Kelompok';
+        }
+
+        // Functions untuk LocalStorage Persistence
+        function loadState() {
+            try {
+                const saved = localStorage.getItem('agrojurno_farm_state');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    appState = { ...appState, ...parsed };
+                } else {
+                    appState.anggota = [...DEFAULT_ANGGOTA];
+                }
+            } catch (e) {
+                console.error("Gagal memuat data dari LocalStorage:", e);
+                appState.anggota = [...DEFAULT_ANGGOTA];
+            }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem('agrojurno_farm_state', JSON.stringify(appState));
+            } catch (e) {
+                console.error("Gagal menyimpan data ke LocalStorage:", e);
+            }
+            renderAll();
+        }
+
+        // Charts
+        let chartTelurInstance = null;
+        let chartAyamInstance = null;
+
+        // Initialize App
+        window.onload = function() {
+            loadState();
+            initCharts();
+            renderAll();
+
+            const today = new Date().toISOString().split('T')[0];
+            if(document.getElementById('kes-tgl')) document.getElementById('kes-tgl').value = today;
+            if(document.getElementById('prod-tgl')) document.getElementById('prod-tgl').value = today;
+            if(document.getElementById('kas-tgl')) document.getElementById('kas-tgl').value = today;
+        };
+
+        function changeActiveUser(val) {
+            activeUser = val;
+            addAuditLog('CHANGE_USER', `Pengguna aktif berganti ke: ${activeUser}`);
+            const adminStatus = hasFullAdminAccess() ? ' (Akses Penuh Admin)' : '';
+            showToast(`Akses aktif sebagai: ${activeUser}${adminStatus}`);
+            renderAll();
+        }
+
+        function addAuditLog(action, detail) {
+            const now = new Date();
+            const timestamp = now.getFullYear() + '-' + 
+                String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                String(now.getDate()).padStart(2, '0') + ' ' + 
+                String(now.getHours()).padStart(2, '0') + ':' + 
+                String(now.getMinutes()).padStart(2, '0');
+
+            appState.auditLogs.unshift({
+                timestamp,
+                user: activeUser,
+                action,
+                detail
+            });
+        }
+
+        function clearAuditLog() {
+            if (!hasFullAdminAccess()) {
+                showToast('Hanya Admin Utama & Sekretaris yang dapat membersihkan Audit Log!', 'error');
+                return;
+            }
+            if (confirm("Apakah Anda yakin ingin mengosongkan riwayat Audit Log?")) {
+                appState.auditLogs = [];
+                addAuditLog('CLEAR_LOGS', 'Riwayat audit log dibersihkan.');
+                saveState();
+                showToast('Audit Log dibersihkan');
+            }
+        }
+
+        function formatRp(num) {
+            return 'Rp ' + Number(num || 0).toLocaleString('id-ID');
+        }
+
+        // ---------------- TAB NAVIGATION SWITCHER ----------------
+        function switchTab(tabName) {
+            const views = ['dashboard', 'pivot-harian', 'anggota', 'populasi', 'produksi', 'keuangan', 'deviden', 'audit'];
+            views.forEach(view => {
+                const el = document.getElementById(`view-${view}`);
+                const btn = document.getElementById(`nav-${view}`);
+                if (view === tabName) {
+                    if (el) el.classList.remove('hidden');
+                    if (btn) {
+                        btn.classList.add('bg-red-50', 'text-red-700', 'font-bold', 'border-l-4', 'border-red-600');
+                        btn.classList.remove('text-slate-600');
+                    }
+                } else {
+                    if (el) el.classList.add('hidden');
+                    if (btn) {
+                        btn.classList.remove('bg-red-50', 'text-red-700', 'font-bold', 'border-l-4', 'border-red-600');
+                        btn.classList.add('text-slate-600');
+                    }
+                }
+            });
+
+            if (tabName === 'dashboard') {
+                updateCharts();
+            }
+        }
+
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.toggle('hidden');
+        }
+
+        function renderAll() {
+            renderPivotHarian();
+            renderAnggota();
+            renderKesehatan();
+            renderProduksi();
+            renderKas();
+            renderDeviden();
+            renderAudit();
+            renderDashboard();
+        }
+
+        // ---------------- PIVOT TABEL PRODUKSI HARIAN ----------------
+        function renderPivotHarian() {
+            const tbody = document.getElementById('table-pivot-body');
+            const tfoot = document.getElementById('table-pivot-foot');
+            tbody.innerHTML = '';
+            tfoot.innerHTML = '';
+
+            let sumBaik = 0, sumRetak = 0, sumPecah = 0, sumTotalBtr = 0;
+            let sumOmsetUtama = 0, sumOmsetRusak = 0, sumGrandOmset = 0;
+
+            document.getElementById('pivot-total-hari').innerText = appState.produksi.length;
+
+            appState.produksi.forEach(item => {
+                const totalBtr = item.baik + item.retak + item.pecah;
+                const omsetUtama = item.baik * item.harga;
+                const omsetRusak = item.penjualanRusak || 0;
+                const grandOmset = omsetUtama + omsetRusak;
+
+                sumBaik += item.baik;
+                sumRetak += item.retak;
+                sumPecah += item.pecah;
+                sumTotalBtr += totalBtr;
+                sumOmsetUtama += omsetUtama;
+                sumOmsetRusak += omsetRusak;
+                sumGrandOmset += grandOmset;
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition border-b border-slate-100';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-semibold text-slate-800">${item.tgl}</td>
+                    <td class="px-3 py-3 text-center text-emerald-700 font-medium">${item.baik} Btr</td>
+                    <td class="px-3 py-3 text-center text-amber-600">${item.retak} Btr</td>
+                    <td class="px-3 py-3 text-center text-rose-500">${item.pecah} Btr</td>
+                    <td class="px-3 py-3 text-center font-bold text-slate-800 bg-slate-50">${totalBtr} Btr</td>
+                    <td class="px-4 py-3 text-right font-medium text-slate-700">${formatRp(omsetUtama)}</td>
+                    <td class="px-4 py-3 text-right text-slate-500">${formatRp(omsetRusak)}</td>
+                    <td class="px-4 py-3 text-right font-bold text-emerald-800">${formatRp(grandOmset)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            tfoot.innerHTML = `
+                <tr>
+                    <td class="px-4 py-3">TOTAL REKAPITULASI</td>
+                    <td class="px-3 py-3 text-center text-emerald-800">${sumBaik} Btr</td>
+                    <td class="px-3 py-3 text-center text-amber-800">${sumRetak} Btr</td>
+                    <td class="px-3 py-3 text-center text-rose-800">${sumPecah} Btr</td>
+                    <td class="px-3 py-3 text-center text-slate-900">${sumTotalBtr} Btr</td>
+                    <td class="px-4 py-3 text-right text-slate-900">${formatRp(sumOmsetUtama)}</td>
+                    <td class="px-4 py-3 text-right text-slate-900">${formatRp(sumOmsetRusak)}</td>
+                    <td class="px-4 py-3 text-right text-emerald-950 font-extrabold text-sm">${formatRp(sumGrandOmset)}</td>
+                </tr>
+            `;
+        }
+
+        // ---------------- ANGGOTA MANAGEMENT ----------------
+        function renderAnggota() {
+            const tbody = document.getElementById('table-anggota-body');
+            tbody.innerHTML = '';
+            
+            const btnTambah = document.getElementById('btn-tambah-anggota');
+            if (appState.anggota.length >= 10) {
+                btnTambah.classList.add('opacity-50', 'cursor-not-allowed');
+                btnTambah.title = "Batas maksimum 10 anggota tercapai";
+            } else {
+                btnTambah.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnTambah.title = "";
+            }
+
+            appState.anggota.forEach((item, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-medium text-slate-800">${idx + 1}</td>
+                    <td class="px-4 py-3 font-mono text-xs font-semibold text-slate-600">${item.no}</td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">${item.nama}</td>
+                    <td class="px-4 py-3 text-slate-600">
+                        <a href="https://wa.me/${item.wa.replace(/[^0-9]/g, '')}" target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1">
+                            <i class="fa-brands fa-whatsapp text-emerald-500"></i> ${item.wa}
+                        </a>
+                    </td>
+                    <td class="px-4 py-3"><span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-1 rounded-lg font-medium">${item.jabatan}</span></td>
+                    <td class="px-4 py-3">
+                        <span class="px-2 py-0.5 text-xs rounded-full font-semibold ${item.status === 'Aktif' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'}">
+                            ${item.status}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">${formatRp(item.modal)}</td>
+                    <td class="px-4 py-3 text-center space-x-2">
+                        <button onclick="openModalEditAnggota(${idx})" class="text-amber-600 hover:text-amber-800" title="Edit Data"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button onclick="deleteAnggota(${idx})" class="text-rose-500 hover:text-rose-700" title="Hapus Anggota"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function openModalTambahAnggota() {
+            if (appState.anggota.length >= 10) {
+                showToast('Maksimal anggota kelompok adalah 10 orang!', 'error');
+                return;
+            }
+            document.getElementById('form-anggota').reset();
+            document.getElementById('anggota-index').value = "-1";
+            document.getElementById('modal-anggota-title').innerText = "Tambah Anggota Baru";
+            toggleModal('modal-anggota');
+        }
+
+        function openModalEditAnggota(idx) {
+            const item = appState.anggota[idx];
+            document.getElementById('anggota-index').value = idx;
+            document.getElementById('anggota-no').value = item.no;
+            document.getElementById('anggota-nama').value = item.nama;
+            document.getElementById('anggota-wa').value = item.wa;
+            document.getElementById('anggota-jabatan').value = item.jabatan;
+            document.getElementById('anggota-status').value = item.status;
+            document.getElementById('anggota-modal').value = item.modal;
+            document.getElementById('modal-anggota-title').innerText = "Edit Data Anggota";
+            toggleModal('modal-anggota');
+        }
+
+        function handleAnggotaSubmit(e) {
+            e.preventDefault();
+            const idx = parseInt(document.getElementById('anggota-index').value);
+            const data = {
+                no: document.getElementById('anggota-no').value,
+                nama: document.getElementById('anggota-nama').value,
+                wa: document.getElementById('anggota-wa').value,
+                jabatan: document.getElementById('anggota-jabatan').value,
+                status: document.getElementById('anggota-status').value,
+                modal: parseFloat(document.getElementById('anggota-modal').value) || 0
+            };
+
+            if (idx === -1) {
+                if (appState.anggota.length >= 10) {
+                    showToast('Batas 10 Anggota Tercapai', 'error');
+                    return;
+                }
+                appState.anggota.push(data);
+                addAuditLog('ADD_MEMBER', `Menambahkan anggota baru: ${data.nama} (${data.no})`);
+                showToast('Anggota berhasil ditambahkan');
+            } else {
+                const oldNama = appState.anggota[idx].nama;
+                appState.anggota[idx] = data;
+                addAuditLog('EDIT_MEMBER', `Memperbarui data anggota: ${oldNama} -> ${data.nama}`);
+                showToast('Data Anggota berhasil diperbarui');
+            }
+
+            toggleModal('modal-anggota');
+            saveState();
+        }
+
+        function deleteAnggota(idx) {
+            const target = appState.anggota[idx];
+            if (confirm(`Hapus anggota ${target.nama}?`)) {
+                addAuditLog('DELETE_MEMBER', `Menghapus anggota: ${target.nama} (${target.no})`);
+                appState.anggota.splice(idx, 1);
+                showToast('Anggota telah dihapus');
+                saveState();
+            }
+        }
+
+        // ---------------- KESEHATAN & POPULASI ----------------
+        function updatePopulasiAwal() {
+            const val = parseInt(document.getElementById('input-populasi-awal').value) || 0;
+            const oldVal = appState.populasiAwal;
+            appState.populasiAwal = val;
+            addAuditLog('UPDATE_POPULATION', `Mengubah populasi awal dari ${oldVal} ke ${val} ekor.`);
+            saveState();
+            showToast('Populasi awal diperbarui');
+        }
+
+        function handleKesehatanSubmit(e) {
+            e.preventDefault();
+            const data = {
+                id: Date.now(),
+                tgl: document.getElementById('kes-tgl').value,
+                status: document.getElementById('kes-status').value,
+                jumlah: parseInt(document.getElementById('kes-jumlah').value) || 0,
+                ket: document.getElementById('kes-ket').value
+            };
+            appState.kesehatan.unshift(data);
+            addAuditLog('ADD_HEALTH', `Mencatat kondisi ayam ${data.status} sebanyak ${data.jumlah} ekor.`);
+            saveState();
+            document.getElementById('form-kesehatan').reset();
+            document.getElementById('kes-tgl').value = new Date().toISOString().split('T')[0];
+            showToast('Catatan kesehatan ayam ditambahkan');
+        }
+
+        function deleteKesehatan(id) {
+            const item = appState.kesehatan.find(k => k.id === id);
+            if (item) {
+                addAuditLog('DELETE_HEALTH', `Menghapus catatan kesehatan ${item.status} (${item.jumlah} ekor) tanggal ${item.tgl}.`);
+            }
+            appState.kesehatan = appState.kesehatan.filter(k => k.id !== id);
+            saveState();
+            showToast('Catatan kesehatan dihapus');
+        }
+
+        function renderKesehatan() {
+            const tbody = document.getElementById('table-kesehatan-body');
+            tbody.innerHTML = '';
+
+            appState.kesehatan.forEach(item => {
+                let badgeClass = 'bg-amber-100 text-amber-800';
+                if (item.status === 'Mati') badgeClass = 'bg-rose-100 text-rose-800';
+                if (item.status === 'Afkir') badgeClass = 'bg-slate-200 text-slate-800';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-medium text-slate-700">${item.tgl}</td>
+                    <td class="px-4 py-3"><span class="px-2.5 py-1 text-xs rounded-full font-semibold ${badgeClass}">${item.status}</span></td>
+                    <td class="px-4 py-3 font-bold text-slate-800">${item.jumlah} Ekor</td>
+                    <td class="px-4 py-3 text-slate-600">${item.ket || '-'}</td>
+                    <td class="px-4 py-3 text-center">
+                        <button onclick="deleteKesehatan(${item.id})" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ---------------- PRODUKSI TELUR ----------------
+        function handleProduksiSubmit(e) {
+            e.preventDefault();
+            const data = {
+                id: Date.now(),
+                tgl: document.getElementById('prod-tgl').value,
+                baik: parseInt(document.getElementById('prod-baik').value) || 0,
+                retak: parseInt(document.getElementById('prod-retak').value) || 0,
+                pecah: parseInt(document.getElementById('prod-pecah').value) || 0,
+                harga: parseFloat(document.getElementById('prod-harga').value) || 0,
+                penjualanRusak: parseFloat(document.getElementById('prod-penjualan-rusak').value) || 0
+            };
+            appState.produksi.unshift(data);
+            addAuditLog('ADD_PRODUCTION', `Input panen telur tgl ${data.tgl}: ${data.baik} baik, ${data.retak} retak, ${data.pecah} pecah.`);
+            saveState();
+            document.getElementById('form-produksi').reset();
+            document.getElementById('prod-tgl').value = new Date().toISOString().split('T')[0];
+            showToast('Data panen & penjualan disimpan');
+        }
+
+        function deleteProduksi(id) {
+            const item = appState.produksi.find(p => p.id === id);
+            if(item) {
+                addAuditLog('DELETE_PRODUCTION', `Menghapus data produksi panen tgl ${item.tgl}.`);
+            }
+            appState.produksi = appState.produksi.filter(p => p.id !== id);
+            saveState();
+            showToast('Data produksi dihapus');
+        }
+
+        function renderProduksi() {
+            const tbody = document.getElementById('table-produksi-body');
+            tbody.innerHTML = '';
+
+            appState.produksi.forEach(item => {
+                const totalRev = (item.baik * item.harga) + (item.penjualanRusak || 0);
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-medium text-slate-700">${item.tgl}</td>
+                    <td class="px-3 py-3 font-semibold text-emerald-600">${item.baik} Btr</td>
+                    <td class="px-3 py-3 text-amber-600">${item.retak} Btr</td>
+                    <td class="px-3 py-3 text-rose-500">${item.pecah} Btr</td>
+                    <td class="px-4 py-3 font-bold text-slate-800">${formatRp(totalRev)}</td>
+                    <td class="px-4 py-3 text-center">
+                        <button onclick="deleteProduksi(${item.id})" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ---------------- MUTASI KAS MASUK & KELUAR ----------------
+        function handleKasSubmit(e) {
+            e.preventDefault();
+            const data = {
+                id: Date.now(),
+                tgl: document.getElementById('kas-tgl').value,
+                jenis: document.getElementById('kas-jenis').value,
+                kategori: document.getElementById('kas-kategori').value,
+                jumlah: parseFloat(document.getElementById('kas-jumlah').value) || 0,
+                ket: document.getElementById('kas-ket').value
+            };
+            appState.kas.unshift(data);
+            addAuditLog('ADD_CASH', `Transaksi Kas ${data.jenis} (${data.kategori}) sebesar ${formatRp(data.jumlah)}.`);
+            saveState();
+            document.getElementById('form-kas').reset();
+            document.getElementById('kas-tgl').value = new Date().toISOString().split('T')[0];
+            showToast('Mutasi kas disimpan');
+        }
+
+        function deleteKas(id) {
+            const item = appState.kas.find(k => k.id === id);
+            if (item) {
+                addAuditLog('DELETE_CASH', `Menghapus mutasi kas ${item.jenis} (${item.kategori}) sebesar ${formatRp(item.jumlah)}.`);
+            }
+            appState.kas = appState.kas.filter(k => k.id !== id);
+            saveState();
+            showToast('Transaksi kas dihapus');
+        }
+
+        function renderKas() {
+            const tbody = document.getElementById('table-kas-body');
+            tbody.innerHTML = '';
+
+            let totalSaldo = 0;
+            const totalRevenueTelur = appState.produksi.reduce((sum, item) => sum + (item.baik * item.harga) + (item.penjualanRusak || 0), 0);
+            const kasAuto7Percent = totalRevenueTelur * 0.07;
+
+            appState.kas.forEach(item => {
+                if(item.jenis === 'Masuk') totalSaldo += item.jumlah;
+                else totalSaldo -= item.jumlah;
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-medium text-slate-700">${item.tgl}</td>
+                    <td class="px-4 py-3">
+                        <span class="px-2.5 py-1 text-xs rounded-full font-semibold ${item.jenis === 'Masuk' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                            ${item.jenis}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-xs font-semibold text-slate-700">${item.kategori || 'Operasional'}</td>
+                    <td class="px-4 py-3 text-slate-600">${item.ket}</td>
+                    <td class="px-4 py-3 text-right font-semibold ${item.jenis === 'Masuk' ? 'text-emerald-600' : 'text-rose-600'}">
+                        ${item.jenis === 'Masuk' ? '+' : '-'}${formatRp(item.jumlah)}
+                    </td>
+                    <td class="px-4 py-3 text-center">
+                        <button onclick="deleteKas(${item.id})" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const grandKasTotal = totalSaldo + kasAuto7Percent;
+            document.getElementById('badge-saldo-kas').innerText = `Saldo Kas Bersih: ${formatRp(grandKasTotal)} (Inc 7% Rev)`;
+        }
+
+        // ---------------- KALKULASI DEVIDEN MODAL ----------------
+        function renderDeviden() {
+            const tbody = document.getElementById('table-deviden-body');
+            tbody.innerHTML = '';
+
+            const totalModal = appState.anggota.reduce((sum, a) => sum + a.modal, 0);
+            const totalRevenue = appState.produksi.reduce((sum, item) => sum + (item.baik * item.harga) + (item.penjualanRusak || 0), 0);
+
+            const porsiDeviden63 = totalRevenue * 0.63;
+            const devidenBersihAnggotaTotal = porsiDeviden63 * 0.70;
+            const retensiUsahaTotal = porsiDeviden63 * 0.30;
+
+            document.getElementById('deviden-total-dibagi').innerText = formatRp(devidenBersihAnggotaTotal);
+
+            appState.anggota.forEach((item, idx) => {
+                const proporsiModal = totalModal > 0 ? (item.modal / totalModal) : 0;
+                const devidenDiterima = proporsiModal * devidenBersihAnggotaTotal;
+                const retensiAnggota = proporsiModal * retensiUsahaTotal;
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-medium text-slate-800">${idx + 1}</td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">${item.nama}</td>
+                    <td class="px-4 py-3 font-medium text-slate-700">${formatRp(item.modal)}</td>
+                    <td class="px-4 py-3 text-slate-600">${(proporsiModal * 100).toFixed(1)}%</td>
+                    <td class="px-4 py-3 font-bold text-emerald-600">${formatRp(devidenDiterima)}</td>
+                    <td class="px-4 py-3 text-slate-500">${formatRp(retensiAnggota)}</td>
+                    <td class="px-4 py-3 text-center">
+                        <button onclick="shareWA('${item.wa}', '${item.nama}', ${devidenDiterima})" class="bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200 text-xs px-2.5 py-1 rounded-lg transition font-medium flex items-center gap-1 mx-auto">
+                            <i class="fa-brands fa-whatsapp text-emerald-600"></i> Slip WA
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function shareWA(phone, nama, deviden) {
+            const text = `Halo Bpk/Ibu ${nama},\nBerikut adalah rincian pembagian deviden AgroJurno Farm:\nHak Deviden Diterima: *${formatRp(deviden)}*\n\nTerima kasih atas partisipasi modal Anda.`;
+            const cleanPhone = phone.replace(/[^0-9]/g, '');
+            window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // ---------------- AUDIT LOG RENDER ----------------
+        function renderAudit() {
+            const tbody = document.getElementById('table-audit-body');
+            tbody.innerHTML = '';
+
+            appState.auditLogs.forEach(log => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition border-b border-slate-100 text-xs';
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-mono text-slate-500">${log.timestamp}</td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">${log.user}</td>
+                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-mono text-[10px] uppercase font-bold">${log.action}</span></td>
+                    <td class="px-4 py-3 text-slate-600">${log.detail}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ---------------- DASHBOARD & CHARTS ----------------
+        function renderDashboard() {
+            const totalAyamAwal = appState.populasiAwal || 0;
+            const totalSakit = appState.kesehatan.filter(k => k.status === 'Sakit').reduce((s, k) => s + k.jumlah, 0);
+            const totalMati = appState.kesehatan.filter(k => k.status === 'Mati').reduce((s, k) => s + k.jumlah, 0);
+            const totalAfkir = appState.kesehatan.filter(k => k.status === 'Afkir').reduce((s, k) => s + k.jumlah, 0);
+            
+            const ayamSehat = Math.max(0, totalAyamAwal - (totalSakit + totalMati + totalAfkir));
+
+            document.getElementById('dash-ayam-sehat').innerText = `${ayamSehat} Ekor`;
+            document.getElementById('dash-ayam-total').innerText = totalAyamAwal;
+
+            const totalBaik = appState.produksi.reduce((s, p) => s + p.baik, 0);
+            const totalRetak = appState.produksi.reduce((s, p) => s + p.retak, 0);
+            const totalPecah = appState.produksi.reduce((s, p) => s + p.pecah, 0);
+
+            document.getElementById('dash-telur-baik').innerText = `${totalBaik.toLocaleString('id-ID')} Btr`;
+            document.getElementById('dash-telur-rusak').innerText = `${(totalRetak + totalPecah).toLocaleString('id-ID')}`;
+
+            const totalRevenue = appState.produksi.reduce((sum, item) => sum + (item.baik * item.harga) + (item.penjualanRusak || 0), 0);
+            document.getElementById('dash-pendapatan').innerText = formatRp(totalRevenue);
+
+            const totalModal = appState.anggota.reduce((sum, a) => sum + a.modal, 0);
+            const kasManual = appState.kas.reduce((sum, k) => sum + (k.jenis === 'Masuk' ? k.jumlah : -k.jumlah), 0);
+            const kas7Percent = totalRevenue * 0.07;
+            const totalKas = kasManual + kas7Percent;
+
+            document.getElementById('dash-kas-total').innerText = formatRp(totalKas);
+            document.getElementById('dash-total-modal').innerText = formatRp(totalModal);
+
+            const porsi63 = totalRevenue * 0.63;
+            document.getElementById('summary-kas-7').innerText = formatRp(kas7Percent);
+            document.getElementById('summary-deviden-63').innerText = formatRp(porsi63 * 0.70);
+            document.getElementById('summary-retensi-30').innerText = formatRp(porsi63 * 0.30);
+        }
+
+        function initCharts() {
+            const ctxTelur = document.getElementById('chartTelur').getContext('2d');
+            chartTelurInstance = new Chart(ctxTelur, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Telur Baik', 'Retak', 'Pecah'],
+                    datasets: [{
+                        data: [0, 0, 0],
+                        backgroundColor: ['#10b981', '#f59e0b', '#ef4444']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            const ctxAyam = document.getElementById('chartAyam').getContext('2d');
+            chartAyamInstance = new Chart(ctxAyam, {
+                type: 'pie',
+                data: {
+                    labels: ['Ayam Sehat', 'Sakit', 'Mati', 'Afkir'],
+                    datasets: [{
+                        data: [0, 0, 0, 0],
+                        backgroundColor: ['#10b981', '#f59e0b', '#ef4444', '#64748b']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            updateCharts();
+        }
+
+        function updateCharts() {
+            if (!chartTelurInstance || !chartAyamInstance) return;
+
+            const totalBaik = appState.produksi.reduce((s, p) => s + p.baik, 0);
+            const totalRetak = appState.produksi.reduce((s, p) => s + p.retak, 0);
+            const totalPecah = appState.produksi.reduce((s, p) => s + p.pecah, 0);
+
+            chartTelurInstance.data.datasets[0].data = [totalBaik, totalRetak, totalPecah];
+            chartTelurInstance.update();
+
+            const totalAyamAwal = appState.populasiAwal || 0;
+            const totalSakit = appState.kesehatan.filter(k => k.status === 'Sakit').reduce((s, k) => s + k.jumlah, 0);
+            const totalMati = appState.kesehatan.filter(k => k.status === 'Mati').reduce((s, k) => s + k.jumlah, 0);
+            const totalAfkir = appState.kesehatan.filter(k => k.status === 'Afkir').reduce((s, k) => s + k.jumlah, 0);
+            const ayamSehat = Math.max(0, totalAyamAwal - (totalSakit + totalMati + totalAfkir));
+
+            chartAyamInstance.data.datasets[0].data = [ayamSehat, totalSakit, totalMati, totalAfkir];
+            chartAyamInstance.update();
+        }
+
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            const message = document.getElementById('toast-message');
+
+            message.innerText = msg;
+            if (type === 'error') {
+                icon.className = 'fa-solid fa-circle-exclamation text-rose-400 text-base';
+            } else {
+                icon.className = 'fa-solid fa-circle-check text-emerald-400 text-base';
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
